@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/temp.css" rel="stylesheet">
+    <style>
+        .cin{
+            position:relative;
+            width:200px;
+            height:25px;
+            border:0;
+            padding:0;
+            margin:0;
+        }
+        .csel{
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:200px;
+            height:25px;
+            line-height:20px;
+            margin:0;
+            padding:0;
+        }
+        .cinType{
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:180px;
+            height:21px;
+            border:1px solid #A9A9A9;
+        }
+    </style>
+</head>
+<body>
+    <form id="test">
+    <div class="cin">
+        <select class="csel" onchange="clickOption(this,'fmin');">
+           <option value="">Πληκτρολογήστε</option>
+           <option value="">Αδιάφορο</option>
+           <option value="1">Ηευ</option>
+        </select>
+        <input name="fmindisplayValue" placeholder="Πληκτρολογήστε" id="fmindisplayValue" class="cinType" onfocus="this.select()" type="text">
+        <input name="fmin" id="fmin" type="hidden">
+    </div>
+
+    <br>
+
+    <div class="cin">
+        <select class="csel" onchange="clickOption(this,'fmax');">
+           <option value="">Πληκτρολογήστε</option>
+           <option value="">Αδιάφορο</option>
+           <option value="1">Ηευ</option>
+        </select>
+        <input name="fmaxdisplayValue" placeholder="Πληκτρολογήστε" id="fmaxdisplayValue" class="cinType" onfocus="this.select()" type="text">
+        <input name="fmax" id="fmax" type="hidden">
+    </div>
+    </form>
+</body>
+
+<script>
+    function clickOption(obj,pre){
+        if(obj.options[obj.selectedIndex].text !== 'Πληκτρολογήστε'){
+            document.getElementById(pre + 'displayValue').value=obj.options[obj.selectedIndex].text;
+        } else { 
+            document.getElementById(pre + 'displayValue').value='';
+        }
+        document.getElementById(pre).value=obj.options[obj.selectedIndex].value;
+    }
+</script>
+
+</html>

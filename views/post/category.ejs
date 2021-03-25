@@ -1,0 +1,37 @@
+<form autocomplete="off" id="form" action="/post/category?id=<%-ad._id%>" method="POST">
+    <div>
+        <div class="form-group">
+            <h5>Κατηγορία ακινήτου:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+            <select id="typeSelector" class="form-control btn-sm" name="category" <%= ad.public != 'undefined' && ad.public ? 'disabled' : ''%>>>
+                <option value=""></option>
+                <option value="res" <%-typeof ad.propType.main != 'undefined' && ad.propType.main == 'res'? 'selected' : ''%> >Κατοικία</option>
+                <option value="pro" <%-typeof ad.propType.main != 'undefined' && ad.propType.main == 'pro'? 'selected' : ''%> >Επαγγελματικός Χωρος</option>
+                <option value="land" <%-typeof ad.propType.main != 'undefined' && ad.propType.main == 'land'? 'selected' : ''%> >Γη</option>
+                <option value="other" <%-typeof ad.propType.main != 'undefined' && ad.propType.main == 'other'? 'selected' : ''%> >Λοιπά Ακίνητα</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <h5>Υποκατηγορία:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+            <select class="form-control btn-sm types" name="subcategory">
+                <%if(typeof ad.propType.sub != 'undefined'){%>
+                <option><%-ad.propType.sub %></option>
+                <%}%>
+            </select>
+        </div>
+        <div class="form-group">
+            <h5>Σκοπός:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+            <div class="form-check d-inline">
+                <input class="form-check-input" type="radio" name="type" id="buy" value="true" <%= typeof ad.type != 'undefined' && ad.type ? 'checked' : '' %>>
+                <label class="form-check-label" for="buy">Αγορά</label>
+            </div>
+            <div class="form-check d-inline ml-3">
+                <input class="form-check-input" type="radio" name="type" id="rent" value="false" <%= typeof ad.type != 'undefined' && !ad.type ? 'checked' : '' %>>
+                <label class="form-check-label" for="rent">Ενοικίαση</label>
+            </div>
+        </div>
+    </div>
+    <hr class="border-success">
+    <button name="btn" type="submit" value="location" class="btn btn-primary btn-block">Επόμενο</button>
+</form>
+
+<script src="/public/js/post/category.js"></script>

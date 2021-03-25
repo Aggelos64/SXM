@@ -1,0 +1,79 @@
+<div class="container"> 
+<div class="container text-right d-none d-md-block" id="reg-log" style="top: -1px;">
+    <%if(typeof hemail === 'undefined' || hemail === ''){//TODO%>
+      <a href="/users/login" style="color: aliceblue;">Σύνδεση</a> |
+      <a href="/users/register" style="color: aliceblue;">Εγγραφή</a>
+    <%}else{%>
+      <span><%=hemail%></span> |
+      <a href="/users/logout" style="color: aliceblue;"> Αποσύνδεση</a>
+    <%}%>
+</div>
+</div>
+
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+  <div class="container" style="padding: 0;">
+    
+  <button id="expbtn" class="navbar-toggler mr-2" type="button" data-toggle="collapse"
+    data-target="#navbarColor01" aria-controls="navbarColor01"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <a id="hlogo" class="mr-5" href="/"><img class="limg" src="/public/img/SXM.png" height="129px"></a>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="/">Αρχική</a>
+        </li>
+        <li class="nav-item dropdown mr-2">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Αγορές</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Αγορές Κατοικιών</a>
+            <a class="dropdown-item" href="#">Αγορές Επαγγελματικών Χώρων</a>
+            <a class="dropdown-item" href="#">Αγορές Γης</a>
+            <a class="dropdown-item" href="#">Αγορές Λοιπών Ακινήτων</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown mr-2">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ενοικιάσεις</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Ενοικιάσεις Κατοικιών</a>
+            <a class="dropdown-item" href="#">Ενοικιάσεις Επαγγελματικών Χώρων</a>
+            <a class="dropdown-item" href="#">Ενοικιάσεις Γης</a>
+            <a class="dropdown-item" href="#">Ενοικιάσεις Λοιπών Ακινήτων</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown mr-2">
+          <a class="nav-link dropdown-toggle" data-toggle="<%= typeof hemail === 'undefined' || hemail === '' ? '' : 'dropdown'%>" href="<%= typeof hemail === 'undefined' || hemail === '' ? '/users/login' : '#'%>" role="button" aria-haspopup="true" aria-expanded="false">mySpiti</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" style="display: list-item;list-style-type: disc;list-style-position: inside;text-indent: -4px;">mySpiti για τον απλό χρήστη</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>Οι αναζητήσεις μου (<%= '0' %>)</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>Αγαπημένες αγγελίες (<%= '0' %>)</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>Σημειώσεις (<%= '0' %>)</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>Κρυμμένες αγγελίες (<%= '0' %>)</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>To προφίλ μου</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>Email alerts</a>
+            <a class="dropdown-item" href="#" style="display: list-item;list-style-type: disc;list-style-position: inside;">mySpiti για τον ιδιοκτήτη</a>
+            <a class="dropdown-item" href="#"><pre style="display: inline;">   </pre>Οι αγγελίες μου (<%= '0' %>)</a>
+          </div>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="#">Ποιοι είμαστε</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Χρήσιμα έγγραφα</a>
+        </li>
+        <li class="nav-item d-md-none">
+          <a href="/users/logout" class="nav-link">Αποσύνδεση</a>
+        </li>
+      </ul>
+      <a href="#"><form action="/post" method="POST"><button type="submit" class="btn btn-info">Δωρεάν Καταχώρηση Αγγελίας</button></form></a>
+    </div>
+  </div>
+</nav>
+
+
+<br>

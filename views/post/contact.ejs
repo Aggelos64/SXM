@@ -1,0 +1,32 @@
+<form id="form" action="/post/contact?id=<%-ad._id%>" method="POST">
+    <h3 class="mb-3">Στοιχεία επικοινωνίας</h3>
+    <div class="form-group">
+        <h5>Όνομα:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="fname" name="fname" placeholder="Όνομα" value="<%= ad.contactInfo.fname != 'undefined' ? ad.contactInfo.fname : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Επώνυμο:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="lname" name="lname" placeholder="Επώνυμο" value="<%= ad.contactInfo.lname != 'undefined' ? ad.contactInfo.lname : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Τηλέφωνο:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="tel" name="tel" placeholder="Τηλέφωνο" value="<%= ad.contactInfo.tel != 'undefined' ? ad.contactInfo.tel : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Επιθυμητές ώρες επικοινωνίας:</h5>
+        <select class="form-control btn-sm" name="contactTime" id="contactTime">
+            <option value="<%= ad.contactInfo.contactTime != 'undefined' ? ''+ad.contactInfo.contactTime : ''%>">Όλες τις ώρες</option>
+            <option value="true">Πρωίνες ώρες</option>
+            <option value="false">Απογευματινές ώρες</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <h5>Email:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Email" value="<%=typeof ad.contactInfo.email != 'undefined' ? ad.contactInfo.email : hemail%>">
+        <small class="text-muted">Το Email σου δεν θα φαίνεται στην αγγελία <a href="#">μάθε περισσότερα.</a></small>
+    </div>
+    <hr class="border-success">
+    <button name="btn" type="submit" value="post" class="btn btn-primary btn-block">Επόμενο</button>
+</form>
+
+<script src="/public/js/post/contact.js"></script>

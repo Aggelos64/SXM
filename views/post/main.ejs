@@ -1,0 +1,56 @@
+<pre class="mt-2"> </pre>
+<div class="row mt-5">
+    <%if(typeof ad.propType.main == 'undefined'){%>
+    <div class="alert alert-dismissible alert-info d-block col-5 ml-auto mr-auto mb-3 text-center">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p class="mb-0">Μέσος χρόνος καταχώρησης αγγελίας = 5min</p>
+    </div>
+    <%}%>
+</div>
+<div class="container-fluid">
+<div class="row mt-3">
+    <div class="col-3 ml-auto mb-auto text-center">
+        <div class="list-group">
+            <div class="list-group-item"><h3 class="font-weight-bold">Η αγγελία σου</h3></div>
+            <button name="btn" type="submit" form="form" value="category"      class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'category' ? 'active' : ''%>">Κατηγορία ακινήτου <img class="addTitle" src="<%='/public/img/'+ ready.category +'.png'%>"></button>
+            <%if(typeof ad.propType.main != 'undefined' && typeof ad.propType.sub != 'undefined' && typeof ad.type != 'undefined'){%>
+            <button name="btn" type="submit" form="form" value="location"      class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'location' ? 'active' : ''%>">Τοποθεσία ακινήτου <img class="addTitle" src="<%='/public/img/'+ ready.location +'.png'%>"></button>
+            <button name="btn" type="submit" form="form" value="main-features" class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'main-features' ? 'active' : ''%>">Κύρια χαρακτηριστικά ακινήτου <img class="addTitle" src="<%='/public/img/'+ ready.mainFeatures +'.png'%>"></button>
+            <button name="btn" type="submit" form="form" value="more"          class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'more' ? 'active' : ''%>">Περισσότερα στοιχεία ακινήτου <img class="addTitle" src="<%='/public/img/'+ ready.more +'.png'%>"></button>
+            <button name="btn" type="submit" form="form" value="discription"   class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'discription' ? 'active' : ''%>">Περιγραφή <img class="addTitle" src="<%='/public/img/'+ ready.discription +'.png'%>"></button>
+            <button name="btn" type="submit" form="form" value="pics"          class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'pics' ? 'active' : ''%>">Φοτογραφίες και βίντεο <img class="addTitle" src="<%='/public/img/'+ ready.pics +'.png'%>"></button>
+            <button name="btn" type="submit" form="form" value="contact"       class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'contact' ? 'active' : ''%>">Στοιχεία επικοινωνίας <img class="addTitle" src="<%='/public/img/'+ ready.contact +'.png'%>"></button>
+            <button name="btn" type="submit" form="form" value="post"          class="list-group-item list-group-item-action pt-3 pb-3 <%= page == 'post' ? 'active' : ''%>">Δημοσίευση</button>
+            <%}%>
+        </div>
+    </div>
+    <div class="col-5 mb-auto mr-3">
+        <div class="col-8">
+            <%- include('./' + page)%>
+        </div>
+    </div>
+    <div class="col-2 mr-auto mt-5">
+        <%if(page == 'category' || page == 'location'){%>
+        <div class="alert alert-dismissible d-block m-auto alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Tip!</strong> Σου θυμίζουμε ότι ανα πάσα στιγμή μπορείς να επεξεργαστείς ξανά και να διορθώσεις την αγγελία σου.
+        </div>
+        <%}%>
+        <%if(page == 'main-features' || page == 'more' || page == 'discription'){%>
+            <div class="alert alert-dismissible d-block m-auto alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Tip!</strong> Δίνοντας όσα περισσότερα στοιχεία του ακινήτου σου γίνεται/μπορείς θα προσελκύσεις περισσότερους ενδιαφερόμενους!
+            </div>
+        <%}%>
+        <%if(page == 'pics'){%>
+            <div class="alert alert-dismissible d-block m-auto alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Tip!</strong> Ανεβάζοντας "καθαρές" φωτογραφίες μπορείς να προσελκύσεις περισσότερους ενδιαφερόμενους
+            </div>
+        <%}%>
+    </div>
+</div>
+</div>
+
+
+<script src="/public/js/post/main.js"></script>

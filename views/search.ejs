@@ -1,0 +1,529 @@
+<div class="row mt-5 container-fluid">
+    <div class="col-8 bg-dark m-auto d-none d-md-block">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<div class="row mt-2 ml-auto mr-auto container-fluid">
+    <div class="d-md-none col-12 mb-2 text-center mt-2">
+        <a class="btn btn-block btn-success" data-toggle="collapse" href="#filters" role="button" aria-expanded="true" aria-controls="filters">Φίλτρα</a>
+    </div>
+    <div class="col-12 col-md-3 card mb-auto mr-auto ml-auto collapse show" id="filters">
+        <div class="card-body">
+            <form autocomplete="off" action="/search/results" method="POST">
+                <div class="d-none">
+                    <select id="sort" name="sort">
+                        <option>agea</option>
+                    </select>
+                    <select id="qnt" name="qnt">
+                        <option>20</option>
+                    </select>
+                </div>
+                <div class="addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Περιοχή:</strong></p>
+                        <input type="text" class="form-control form-control" id="area" name="area" placeholder="Πληκτρολόγησε μία ή περισσότερες τοποθεσίες">
+                    </div>
+                </div>
+                <hr class="border-primary">
+                <div class="addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Σκοπός:</strong></p>
+                        <div class="form-check d-inline">
+                            <input class="form-check-input" type="radio" name="type" id="buy" value="true" <%= typeof type != 'undefined' && type ? 'checked' : '' %>>
+                            <label class="form-check-label" for="buy">Αγορά</label>
+                        </div>
+                        <div class="form-check d-inline ml-3">
+                            <input class="form-check-input" type="radio" name="type" id="rent" value="false" <%= typeof type != 'undefined' && type ? '' : 'checked' %>>
+                            <label class="form-check-label" for="rent">Ενοικίαση</label>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-primary">
+                <div class="addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Κατηγορία ακινήτου:</strong></p>
+                        <select id="typeSelector" class="form-control btn-sm" name="category">
+                            <option value="res">Κατοικία</option>
+                            <option value="pro">Επαγγελματικός Χωρος</option>
+                            <option value="land">Γη</option>
+                            <option value="other">Λοιπά Ακίνητα</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Υποκατηγορία:</strong></p>
+                        <select class="form-control btn-sm types" name="subcategory">
+                        </select>
+                    </div>
+                </div>
+                <hr class="border-primary">
+                <h5 class="text-center text-success">Κύρια Χαρακτηριστικά Ακινήτου:</h5>
+                <div class="addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Τιμή (€):</strong></p>
+                        <div class="row">
+                            <div class="col-5 m-auto">
+                                <input type="text" list="pricelist" class="form-control btn-sm" id="minprice" name="minprice" placeholder="Αδιάφορο">
+                            </div>
+                            Έως:
+                            <div class="col-5 m-auto">
+                                <input type="text" list="pricelist" class="form-control btn-sm" id="maxprice" name="maxprice" placeholder="Αδιάφορο">
+                            </div>
+                            <datalist id="pricelist">
+                                <option>150</option>
+                                <option>200</option>
+                                <option>300</option>
+                                <option>500</option>
+                                <option>750</option>
+                                <option>1000</option>
+                                <option>1500</option>
+                                <option>2000</option>
+                                <option>3000</option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-groop">
+                        <p class="mb-3"><strong>Εμβαδόν (τ.μ.):</strong></p>
+                        <div class="row">
+                            <div class="col-5 m-auto">
+                                <input type="text" list="arealist" class="form-control btn-sm" id="minarea" name="minarea" placeholder="Αδιάφορο">
+                            </div>
+                            Έως:
+                            <div class="col-5 m-auto">
+                                <input type="text" list="arealist" class="form-control btn-sm" id="maxarea" name="maxarea" placeholder="Αδιάφορο">
+                            </div>
+                            <datalist id="arealist">
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-primary">
+                <div class="res pro other addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Όροφος:</strong></p>
+                        <div class="row">
+                            <div class="col-5 m-auto">
+                                <input type="text" list="floorlist" class="form-control btn-sm" id="minfloor" name="minfloor" placeholder="Αδιάφορο">
+                            </div>
+                            Έως:
+                            <div class="col-5 m-auto">
+                                <input type="text" list="floorlist" class="form-control btn-sm" id="maxfloor" name="maxfloor" placeholder="Αδιάφορο">
+                            </div>
+                            <datalist id="floorlist">
+                                <option value="-3">ΥΠ</option>
+                                <option value="-2">ΗΜ/ΓΕΙΟ</option>
+                                <option value="-1">ΙΣ</option>
+                                <option value="0">ΗΜ/ΦΟΣ</option>
+                                <option value="1">1ος</option>
+                                <option value="2">2ος</option>
+                                <option value="3">3ος</option>
+                                <option value="4">4ος</option>
+                                <option value="5">5ος</option>
+                                <option value="6">6ος</option>
+                                <option value="7">7ος</option>
+                                <option value="8">8ος</option>
+                                <option value="9">9ος</option>
+                                <option value="10">10ος</option>
+                                <option value="15">15ος</option>
+                                <option value="20">20ος</option>
+                                <option value="30">30ος+</option>
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <div class="form-group res pro">
+                        <p class="mb-3"><strong>Δωμάτια:</strong></p>
+                        <div class="row">
+                            <div class="col-5 m-auto">
+                                <input type="text" list="roomlist" class="form-control btn-sm" id="minrooms" name="minrooms" placeholder="Αδιάφορο">
+                            </div>
+                            Έως:
+                            <div class="col-5 m-auto">
+                                <input type="text" list="roomlist" class="form-control btn-sm" id="maxrooms" name="maxrooms" placeholder="Αδιάφορο">
+                            </div>
+                            <datalist id="roomlist">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10+</option>
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <div class="form-group res pro">
+                        <p class="mb-3"><strong>Μπάνια:</strong></p>
+                        <div class="row">
+                            <div class="col-5 m-auto">
+                                <input type="text" list="bathlist" class="form-control btn-sm" id="minbath" name="minbath" placeholder="Αδιάφορο">
+                            </div>
+                            Έως:
+                            <div class="col-5 m-auto">
+                                <input type="text" list="bathlist" class="form-control btn-sm" id="maxbath" name="maxbath" placeholder="Αδιάφορο">
+                            </div>
+                            <datalist id="bathlist">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5+</option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-primary res pro other">
+                <div class="res pro other addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Θέρμανση:</strong></p>
+                        <select class="form-control btn-sm" name="heat">
+                            <option>Αδιάφορο</option>
+                            <option>Αυτόνομη θέρμανση</option>
+                            <option>Κεντρική θέρμανση</option>
+                            <option>Χωρίς θέρμανση</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Μέσο θέρμανσης:</strong></p>
+                        <select class="form-control btn-sm" name="heatType">
+                            <option>Αδιάφορο</option>
+                            <option>Πετρέλαιο</option>
+                            <option>Φυσικό αέριο</option>
+                            <option>Υγραέριο</option>
+                            <option>Ρεύμα</option>
+                            <option>Θερμοσυσσωρευτές</option>
+                            <option>Σόμπα</option>
+                            <option>Pellet</option>
+                            <option>Ξύλα</option>
+                            <option>Τηλεθέρμανση</option>
+                            <option>Γεωθέρμικη ενέργεια</option>
+                            <option>Υπέρυθρες</option>
+                            <option>Fan Coil</option>
+                        </select>
+                    </div>
+                </div>
+                <hr class="border-primary res pro other">
+                <div class="res pro addbtn">
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Έτος κατασκευής:</strong></p>
+                        <div class="row">
+                            <div class="col-5 m-auto">
+                                <input type="text" list="yearlist" class="form-control btn-sm" id="minyear" name="minyear" placeholder="Αδιάφορο">
+                            </div>
+                            Έως:
+                            <div class="col-5 m-auto">
+                                <input type="text" list="yearlist" class="form-control btn-sm" id="maxyear" name="maxyear" placeholder="Αδιάφορο">
+                            </div>
+                            <datalist id="yearlist">
+                                <option>1950</option>
+                                <option>1970</option>
+                                <option>1980</option>
+                                <option>1990</option>
+                                <option>2000</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                                <option>2018</option>
+                                <option>2019</option>
+                                <option>2020</option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="mb-3"><strong>Κατάσταση Ακινήτου:</strong></p>
+                        <select class="form-control btn-sm" name="status">
+                            <option>Αδιάφορο</option>
+                            <option>Νεόδμητο</option>
+                            <option>Υπό κατασκευή</option>
+                            <option>Ανακαινισμένο</option>
+                            <option>Βαμμένο</option>
+                            <option>Πολυτελές</option>
+                        </select>
+                    </div>
+                </div>
+                <hr class="border-primary res pro">
+                <div>
+                    <div class="text-center">
+                        <button class="btn btn-success mainbtn" type="button" data-toggle="collapse" data-target="#morefilters" aria-expanded="false" aria-controls="morefilters">Περισσότερα φίλτρα</button>
+                    </div>
+                    <div class="collapse" id="morefilters">
+                        <hr class="border-primary">
+                        <div class="addbtn">
+                            <h5 class="mb-3 text-center text-success"><strong>Επιπλέον χαρακτηριστικά ακινήτου:</strong></h5>
+                            <div class="form-group row">
+                                <div class="col-6 extra">
+
+                                </div>
+                                <div class="col-6 extra">
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+                        <div class="other addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Έτη που λειτουργεί η επιχείρηση:</strong></p>
+                                <select class="form-control btn-sm">
+                                    <option value="">Αδιάφορο</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option value="10">10+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-primary other">
+                        <div class="addbtn">
+                            <h5 class="mb-3 text-center text-success"><strong>Χαρακτηριστικά αγγελίας:</strong></h5>
+                            <div class="form-group">
+                                <label for="age">Η αγγελία δημιουργήθηκε:</label>
+                                <select class="form-control btn-sm" name="age">
+                                    <option>Αδιάφορο</option>
+                                    <option>Τελευταίες 24 ώρες</option>
+                                    <option>Τελευταίες 3 ημέρες</option>
+                                    <option>Τελευταίες 7 ημέρες</option>
+                                    <option>Τελευταίο μήνα</option>
+                                    <option>Τελευταίους 3 μήνες</option>
+                                    <option>Τελευταίους 6 μήνες</option>
+                                    <option>Τελευταίο χρόνο</option>
+                                    <option>Τελευταία 3 χρόνια</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="updated">Τελευταία ενημέρωση αγγελίας:</label>
+                                <select class="form-control btn-sm" name="updated">
+                                    <option>Αδιάφορο</option>
+                                    <option>Τελευταίες 24 ώρες</option>
+                                    <option>Τελευταίες 3 ημέρες</option>
+                                    <option>Τελευταίες 7 ημέρες</option>
+                                    <option>Τελευταίο μήνα</option>
+                                    <option>Τελευταίους 3 μήνες</option>
+                                    <option>Τελευταίους 6 μήνες</option>
+                                    <option>Τελευταίο χρόνο</option>
+                                </select>
+                            </div>
+                            <p class="mb-0"><strong>Δες αγγελίες μόνο με:</strong></p><br>
+                            <div class="form-group row text-center">
+                                <div class="col-6">
+                                    <label class="form-check-label d-block"><input name="" value="" class="form-check-input" type="checkbox">Φωτογραφίες</label>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-check-label d-block"><input name="" value="" class="form-check-input" type="checkbox">Μειωμένη τιμή</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+                        <div class="addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Κωδικός ακινήτου:</strong></p>
+                                <input type="text" class="form-control btn-sm" id="code" name="code" placeholder="Βάλε κωδικό">
+                            </div>
+                        </div>
+                        <hr class="border-primary">
+                        <div class="res pro land addbtn">
+                            <h5 class="text-center text-success">Περισσότερα κριτήρια:</h5>
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Τιμή/τ.μ.:</strong></p>
+                                <div class="row">
+                                    <div class="col-5 m-auto">
+                                        <input type="text" list="pricepertmlist" class="form-control btn-sm" id="minpriceptm" name="minpriceptm" placeholder="Αδιάφορο">
+                                    </div>
+                                    Έως:
+                                    <div class="col-5 m-auto">
+                                        <input type="text" list="pricepertmlist" class="form-control btn-sm" id="maxpriceptm" name="maxpriceptm" placeholder="Αδιάφορο">
+                                    </div>
+                                    <datalist id="pricepertmlist">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>12</option>
+                                        <option>15</option>
+                                        <option>20</option>
+                                        <option>25</option>
+                                        <option>30+</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="border-primary res pro land">
+                        <div class="res pro addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Ενεργειακή κλάση:</strong></p>
+                                <select class="form-control btn-sm" name="energyclass">
+                                    <option>Αδιάφορο</option>
+                                    <option>Α+</option>
+                                    <option>Α</option>
+                                    <option>Β+</option>
+                                    <option>Β</option>
+                                    <option>Γ</option>
+                                    <option>Δ</option>
+                                    <option>Ε</option>
+                                    <option>Ζ</option>
+                                    <option>Η</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-primary res pro">
+                        <div class="pro addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Ρεύμα επαγγελματικόυ χωρου</strong></p>
+                                <select class="form-control btn-sm" name=proenergy>
+                                    <option>Αδιάφορο</option>
+                                    <option>Μονοφασικό</option>
+                                    <option>Τριφασικό</option>
+                                    <option>Βιομηχανικό</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-primary pro">
+                        <div class="res land addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Προσανατολισμός:</strong></p>
+                                <select class="form-control btn-sm" name="direction">
+                                    <option>Αδιάφορο</option>
+                                    <option>Ανατολικός</option>
+                                    <option>Ανατολικοδυτικός</option>
+                                    <option>Βόρειος</option>
+                                    <option>Βορειοανατολικός</option>
+                                    <option>Βόρειοδυτικός</option>
+                                    <option>Δυτικός</option>
+                                    <option>Νότιος</option>
+                                    <option>Νότιοανατολικός</option>
+                                    <option>Νότιοδυτικός</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-primary res land">
+                        <div class="res pro addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Κοντά σε:</strong></p>
+                                <select class="form-control btn-sm" name="near">
+                                    <option>Αδιάφορο</option>
+                                    <option>Αεροδρόμιο</option>
+                                    <option>Ηλεκτρικός</option>
+                                    <option>Λεωφορείο</option>
+                                    <option>Λιμάνι</option>
+                                    <option>Μετρό</option>
+                                    <option>Τραμ</option>
+                                    <option>Τρένο</option>
+                                    <option>Τρολεί</option>
+                                    <option>Μεσα μαζικής μεταφοράς</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-primary res pro">
+                        <div class="res addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Είδος ακινήτου:</strong></p>
+                                <select class="form-control btn-sm" name="kind">
+                                    <option>Αδιάφορο</option>
+                                    <option>Διατηρητέο</option>
+                                    <option>Λυόμενο</option>
+                                    <option>Νεοκλασικό</option>
+                                    <option>Παραδοσιακό</option>
+                                    <option>Πέτρινο</option>
+                                    <option>Προκατασκευή</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="border-primary res">
+                        <div class="addbtn">
+                            <div class="form-group">
+                                <p class="mb-3"><strong>Ζώνη:</strong></p>
+                                <select class="form-control btn-sm" name="zone">
+                                    <option>Αδιάφορο</option>
+                                    <option>Αγροτική</option>
+                                    <option>Ανάπλασης</option>
+                                    <option>Βιομηχανική</option>
+                                    <option>Εμπορική</option>
+                                    <option>Οικιστική</option>
+                                    <option>Εκτός σχεδίου</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-primary">
+                <button type="submit" class="btn btn-primary btn-block mainbtn">Ανανέωση</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-12 col-md-7 card mr-auto mb-auto">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6 col-md-2 ml-auto">
+                <label for="qnt2">Αποτ./ σελίδα:</label>
+                    <select class="form-control btn-sm" id="qnt2" name="qnt2">
+                        <option>15</option>
+                        <option selected>20</option>
+                        <option>25</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label for="sort2">Ταξινόμηση:</label>
+                    <select class="form-control btn-sm" id="sort2" name="sort2">
+                        <option value="pa">Τιμή άυξουσα</option>
+                        <option value="pd">Τιμή φθίνουσα</option>
+                        <option value="aa">τ.μ. άυξουσα</option>
+                        <option value="ad">τ.μ. φθίνουσα</option>
+                        <option selected value="agea">Ηλικία αγγελίας άυξουσα</option>
+                        <option value="aged">Ηλικία αγγελίας φθίνουσα</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row postings mt-2">
+                <%if(typeof docs !== 'undefined'){%>
+                    <%docs.forEach((doc) =>{%>
+                        <%var img = doc.imgPaths%>
+                        <a href="/" class="col-12 bg-secondary mt-2 p-1">
+                            <div class="float-left" style="background-image: url(<%=typeof img[0] !== 'undefined' ? img[0] : '/public/img/0.png'%>);background-size: cover;height: 280px;width:40%">
+                            </div>
+                            <div class="float-left row ml-2" style="width: 60%;">
+                                <div class="col-12" style="color: white;">
+                                    <h4 class="ml-2 mb-0 text-info" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><%=doc.propType.sub + ', '+  +doc.area + ' τ.μ.' + ' προς ' + (doc.type ? 'Αγορά' : 'Ενοικίαση')%></h4>
+                                    <small class="ml-2 mb-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><%= doc.location.sub + ', ' + doc.location.street + ' ' + doc.location.address %></small>
+                                </div>
+                            </div>
+                        </a>
+                    <%})%>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-1 mr-auto mb-auto bg-white mt-2 mt-md-0">
+        <br>
+        <br>
+    </div>
+</div>
+
+<script src="/public/js/searchFiller.js"></script>

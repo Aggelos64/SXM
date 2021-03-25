@@ -1,0 +1,43 @@
+<form id="form" action="/post/pics?id=<%-ad._id%>" method="POST">
+    <div>
+        <h5>Επιλογή εικόνων</h5>
+        <input class="filepond" type="file" id="trueFiles" name="pics" multiple/>
+    </div>
+    <div class="row">
+        <%const pics = ad.imgPaths%>
+        <%pics.forEach(function(pic) {%>
+            <div class="col-3 border-primary border m-2 p-0">
+                <img class="mt-auto img-fluid" src="<%= pic%>" style="max-width: 100%;max-height: 100%;">
+                <div class="text-center bg-light removeBtn" style="position: absolute;bottom: 0;width: 100%;cursor: pointer;">Remove</div>
+            </div>
+        <%})%>
+    </div>
+    <hr class="border-success">
+    <div class="form-group">
+        <p>Ανέβασε το βίντεο του ακινήτου σου στο YouTube και επικόλλησε τη διεύθυνση του εδώ</p>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="vidurl" name="vidurl" placeholder="https://www.youtube.com/watch?v=...">
+            <div class="input-group-append">
+                <span class="input-group-text">τ.μ.</span>
+            </div>
+        </div>
+    </div>
+    <hr class="border-success">
+    <button name="btn" type="submit" value="contact" class="btn btn-primary btn-block">Επόμενο</button>
+</form>
+
+<script>
+$( document ).ready(function() {
+    $('.removeBtn').hover(function(){
+        $(this).addClass('bg-danger');
+        $(this).removeClass('bg-light');
+    },function(){
+        $(this).addClass('bg-light');
+        $(this).removeClass('bg-danger');
+    })
+
+    $('.removeBtn').on('click', function(){
+        //TODO
+    })
+});
+</script>

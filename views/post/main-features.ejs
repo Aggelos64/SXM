@@ -1,0 +1,204 @@
+<form autocomplete="off" id="form" action="/post/main-features?id=<%-ad._id%>" method="POST">
+    <div class="form-group">
+        <h5>Τιμή ακινήτου:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="price" name="price" placeholder="Πληκτρολόγησε μόνο την τιμή" value="<%= ad.price.now != 'undefined' ? ad.price.now : ''%>">
+            <div class="input-group-append">
+                <span class="input-group-text"><%-ad.type ? '€' : '€/μήνα'%></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5>Εμβαδόν ακινήτου:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="area" name="area" placeholder="Πληκτρολόγησε το εμβαδόν" value="<%= ad.area != 'undefined' ? ad.area : ''%>">
+            <div class="input-group-append">
+                <span class="input-group-text">τ.μ.</span>
+            </div>
+        </div>
+    </div>
+    <%if(ad.propType.main != 'land'){%>
+    <div class="form-group">
+        <h5>Εμβαδόν οικοπέδου:</h5>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="area2" name="area2" placeholder="Πληκτρολόγησε το εμβαδόν" value="<%= ad.atrr.propArea != 'undefined' ? ad.atrr.propArea : ''%>">
+            <div class="input-group-append">
+                <span class="input-group-text">τ.μ.</span>
+            </div>
+        </div>
+    </div>
+    <%}%>
+    <%if(ad.propType.main != 'land'){%>
+    <hr class="border-success">
+    <div class="form-group">
+        <h5>Όροφος:</h5>
+        <div>
+            <select class="form-control" name="floor" id="floor">
+                <option value="<%= ad.atrr.floor != 'undefined' ? ad.atrr.floor : ''%>">Επίλεξε όροφο</option>
+                <option value="-3">ΥΠ</option>
+                <option value="-2">ΗΜ/ΓΕΙΟ</option>
+                <option value="-1">ΙΣ</option>
+                <option value="0">ΗΜ/ΦΟΣ</option>
+                <option value="1">1ος</option>
+                <option value="2">2ος</option>
+                <option value="3">3ος</option>
+                <option value="4">4ος</option>
+                <option value="5">5ος</option>
+                <option value="6">6ος</option>
+                <option value="7">7ος</option>
+                <option value="8">8ος</option>
+                <option value="9">9ος</option>
+                <option value="10">10ος</option>
+                <option value="15">15ος</option>
+                <option value="20">20ος</option>
+                <option value="30">30ος+</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5>Επίπεδα:</h5>
+        <div>
+            <select class="form-control" name="floors" id="floors">
+                <option value="<%= ad.atrr.floors != 'undefined' ? ad.atrr.floors : ''%>">Επίλεξε Επίπεδα</option>
+                <option value="1">1 επίπεδο</option>
+                <option value="2">2 επίπεδα</option>
+                <option value="3">3 επίπεδα</option>
+                <option value="4">4 επίπεδα</option>
+                <option value="5">5 επίπεδα</option>
+                <option value="6">6 επίπεδα</option>
+                <option value="7">7 επίπεδα</option>
+                <option value="8">8 επίπεδα</option>
+                <option value="9">9 επίπεδα</option>
+                <option value="10">10+ επίπεδα</option>
+            </select>
+        </div>
+    </div>
+    <%if(ad.propType.main != 'other'){%>
+    <div class="form-group">
+        <h5>Δωμάτια:</h5>
+        <div>
+            <select class="form-control" name="rooms" id="rooms">
+                <option value="<%= ad.atrr.bedrooms != 'undefined' ? ad.atrr.bedrooms : ''%>">Επίλεξε αριθμό δωμάτιων</option>
+                <option value="0">0 δωμάτια</option>
+                <option value="1">1 δωμάτιο</option>
+                <option value="2">2 δωμάτια</option>
+                <option value="3">3 δωμάτια</option>
+                <option value="4">4 δωμάτια</option>
+                <option value="5">5 δωμάτια</option>
+                <option value="6">6 δωμάτια</option>
+                <option value="7">7 δωμάτια</option>
+                <option value="8">8 δωμάτια</option>
+                <option value="9">9 δωμάτια</option>
+                <option value="10">10+ δωμάτια</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5>Μπάνια:</h5>
+        <div>
+            <select class="form-control" name="bathrooms" id="bathrooms">
+                <option value="<%= ad.atrr.bathrooms != 'undefined' ? ad.atrr.bathrooms : ''%>">Επίλεξε αριθμό μπάνιων</option>
+                <option value="0">0 μπάνια</option>
+                <option value="1">1 μπάνιο</option>
+                <option value="2">2 μπάνια</option>
+                <option value="3">3 μπάνια</option>
+                <option value="4">4 μπάνια</option>
+                <option value="5">5 μπάνια</option>
+                <option value="6">6 μπάνια</option>
+                <option value="7">7 μπάνια</option>
+                <option value="8">8 μπάνια</option>
+                <option value="9">9 μπάνια</option>
+                <option value="10">10+ μπάνια</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5>Κουζίνες:</h5>
+        <div>
+            <select class="form-control" name="kitchens" id="kitchens">
+                <option value="<%= ad.atrr.kitchens != 'undefined' ? ad.atrr.kitchens : ''%>">Επίλεξε αριθμό κουζινών</option>
+                <option value="0">0 κουζίνες</option>
+                <option value="1">1 κουζίνα</option>
+                <option value="2">2 κουζίνες</option>
+                <option value="3">3 κουζίνες</option>
+                <option value="4">4 κουζίνες</option>
+                <option value="5">5 κουζίνες</option>
+                <option value="6">6 κουζίνες</option>
+                <option value="7">7 κουζίνες</option>
+                <option value="8">8 κουζίνες</option>
+                <option value="9">9 κουζίνες</option>
+                <option value="10">10+ κουζίνες</option>
+            </select>
+        </div>
+    </div>
+    <%if(ad.propType.main == 'res'){%>
+    <div class="form-group">
+        <h5>Σαλόνια:</h5>
+        <div>
+            <select class="form-control" name="livingrooms" id="livingrooms">
+                <option value="<%= ad.atrr.livingrooms != 'undefined' ? ad.atrr.livingrooms : ''%>">Επίλεξε αριθμό Σαλονιών</option>
+                <option value="0">0 Σαλόνια</option>
+                <option value="1">1 Σαλόνι</option>
+                <option value="2">2 Σαλόνια</option>
+                <option value="3">3 Σαλόνια</option>
+                <option value="4">4 Σαλόνια</option>
+                <option value="5">5 Σαλόνια</option>
+                <option value="6">6 Σαλόνια</option>
+                <option value="7">7 Σαλόνια</option>
+                <option value="8">8 Σαλόνια</option>
+                <option value="9">9 Σαλόνια</option>
+                <option value="10">10+ Σαλόνια</option>
+            </select>
+        </div>
+    </div>
+    <%}%>
+    <%}%>
+    <hr class="border-success">
+    <div class="form-group">
+        <h5>Θέρμανση:</h5>
+        <select class="form-control" name="heat" id="heat">
+            <option value="<%= ad.atrr.heat != 'undefined' ? ad.atrr.heat : ''%>">Επίλεξε</option>
+            <option>Αυτόνομη θέρμανση</option>
+            <option>Κεντρική θέρμανση</option>
+            <option>Χωρίς θέρμανση</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <h5>Μέσο θέρμανσης:</h5>
+        <select class="form-control" name="heatType" id="heatType">
+            <option value="<%= ad.atrr.heatType != 'undefined' ? ad.atrr.heatType : ''%>">Επίλεξε</option>
+            <option>Πετρέλαιο</option>
+            <option>Φυσικό αέριο</option>
+            <option>Υγραέριο</option>
+            <option>Ρεύμα</option>
+            <option>Θερμοσυσσωρευτές</option>
+            <option>Σόμπα</option>
+            <option>Pellet</option>
+            <option>Ξύλα</option>
+            <option>Τηλεθέρμανση</option>
+            <option>Γεωθέρμικη ενέργεια</option>
+            <option>Υπέρυθρες</option>
+            <option>Fan Coil</option>
+        </select>
+    </div>
+    <%if(ad.propType.main != 'other'){%>
+    <hr class="border-success">
+    <div class="form-group">
+        <h5>Έτος κατασκευής:</h5>
+        <input type="text" class="form-control form-control-sm" id="constage" name="constage" placeholder="Πληκτρολόγησε το έτος κατασκευής (π.χ. 1995)" value="<%= ad.atrr.constAge != 'undefined' ? ad.atrr.constAge : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Κατάσταση Ακινήτου:</h5>
+        <label class="form-check-label d-block"><input name="status" class="form-check-input" type="checkbox" <%= ad.atrr.status.includes('Νεόδμητο') ? 'checked' : ''%> value="Νεόδμητο">Νεόδμητο</label>
+        <label class="form-check-label d-block"><input name="status" class="form-check-input" type="checkbox" <%= ad.atrr.status.includes('Υπο κατασκευή') ? 'checked' : ''%> value="Υπο κατασκευή">Υπο κατασκευή</label>
+        <label class="form-check-label d-block"><input name="status" class="form-check-input" type="checkbox" <%= ad.atrr.status.includes('Ανακαινισμένο') ? 'checked' : ''%> value="Ανακαινισμένο">Ανακαινισμένο</label>
+        <label class="form-check-label d-block"><input name="status" class="form-check-input" type="checkbox" <%= ad.atrr.status.includes('Βαμμένο') ? 'checked' : ''%> value="Βαμμένο">Βαμμένο</label>
+        <label class="form-check-label d-block"><input name="status" class="form-check-input" type="checkbox" <%= ad.atrr.status.includes('Πολυτελές') ? 'checked' : ''%> value="Πολυτελές">Πολυτελές</label>
+    </div>
+    <%}%>
+    <%}%>
+    <hr class="border-success">
+    <button name="btn" type="submit" value="more" class="btn btn-primary btn-block mb-5">Επόμενο</button>
+</form>
+
+<script src="/public/js/post/main-features.js"></script>

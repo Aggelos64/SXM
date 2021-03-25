@@ -1,0 +1,10 @@
+<form id="form" action="/post/post?id=<%-ad._id%>" method="POST">
+    <h4 class="mb-3">Δημοσίευση αγγελίας</h4>
+    <p>Η αγγελία σου θα δημοσιευτεί στο σάιτ μας για 6 μήνες εντελώς Δωρεάν!</p>
+
+    <hr class="border-success">
+    <button name="btn" type="<%=ready.ready ? 'submit' : 'button'%>" value="postAd" class="btn btn-primary btn-lg btn-block <%=ready.ready ? '' : 'disabled'%>">ΔΗΜΟΣΙΕΥΣΗ</button>
+    <%if(!ready.ready){%>
+        <small class="text-danger">Παρακαλούμε συμπλήρωσε όλα τα υποχρεωτικά πεδία ώστε να μπορέσεις να δημοσιεύσεις την αγγελία σου!</small>
+    <%}%>
+</form>

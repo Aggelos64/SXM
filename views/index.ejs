@@ -1,0 +1,271 @@
+<%var imgs = ["athens","thess"]%>
+<div class="d-none d-md-block" style="z-index: 0;position: absolute;background: url(/public/img/<%= imgs[Math.floor(Math.random() * 2)] %>.jpg);width: 100%;height: 80vh;box-shadow: inset 0px 0px 164px 6px black;background-repeat: no-repeat;background-size: cover;">
+</div>
+
+<div class="container" style="z-index: 1;margin-top: 56px;">
+
+    <div class="container" style="position: absolute;top: 33%;">  
+        <div class="row mb-3">
+            <div class="col-10">
+                <h4 class="mb-3" style="text-shadow: 3px 3px 5px black;">Βρες εύκολα το νέο σου σπίτι χωρίς μεσιτικές αμοιβές!</h4>
+                <span style="text-shadow: 3px 3px 5px black;">Αγγελίες μόνο από ιδιοκτήτες ακινήτων από όλη την Ελλάδα. Εδώ η αγγελία σου μετράει χωρίς να κρύβεται!</span>
+            </div>
+        </div>
+        <form action="/search/results" method="GET">
+        <div class="row" style="margin-left: 14%;">
+            <div class="col-12">
+                <div class="btn-group-toggle btn-group-sm" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="todo2" id="todo1" autocomplete="off" <%=typeof cookie.propType.main === 'undefined' || cookie.propType.main == 'res' ? 'checked' : ''%>> Κατοικία
+                    </label>
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="todo2" id="todo2" autocomplete="off" <%=typeof cookie.propType.main !== 'undefined' && cookie.propType.main == 'pro' ? 'checked' : ''%>> Επαγγελματικός Χώρος
+                    </label>
+                    <br class="d-md-none">
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="todo2" id="todo3" autocomplete="off" <%=typeof cookie.propType.main !== 'undefined' && cookie.propType.main == 'land' ? 'checked' : ''%>> Γη
+                    </label>
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="todo2" id="todo4" autocomplete="off" <%=typeof cookie.propType.main !== 'undefined' && cookie.propType.main == 'other' ? 'checked' : ''%>> Λοιπά Ακίνητα
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row p-1">
+            <div class="col-12 col-md-2">
+                <div class="btn-group-toggle btn-group-sm" data-toggle="buttons">
+                    <label class="btn btn-primary active w-100">
+                        <input type="radio" name="todo1" id="todo5" autocomplete="off" <%=typeof cookie.type !== 'undefined' && cookie.type ? 'checked' : ''%>> Αγορά
+                    </label>
+                    <br class="d-none d-md-block">
+                    <label class="btn btn-primary mt-1 w-100">
+                        <input type="radio" name="todo1" id="todo6" autocomplete="off" <%=typeof cookie.type !== 'undefined' && cookie.type ? '' : 'checked'%>> Ενοικίαση
+                    </label>
+                  </div>
+            </div>
+
+            <div class="col-12 col-md-10 row mb-auto rounded pl-1 pr-1" style="background-color: rgba(30, 30, 30, 0.65);margin-left: -7px;">
+                <div class="col-12 col-md-5 pt-1 pb-1 pl-0 pr-0">
+                    <input class="form-control m-auto" type="text" placeholder="Πληκτρολόγησε μία ή περισσότερες τοποθεσίες"><%//todo%>
+                </div>
+                <div class="col-3 col-md-1 pt-1 pb-1 pl-0 pr-0">
+                    <input class="form-control m-auto" type="text" placeholder="€ από" value="<%=typeof cookie.price.min !== 'undefined' && cookie.price.min !== 'na'? cookie.price.min : ''%>">
+                </div>
+                <div class="col-3 col-md-1 pt-1 pb-1 pl-0 pr-0">
+                    <input class="form-control m-auto" type="text" placeholder="€ έως" value="<%=typeof cookie.price.max !== 'undefined' && cookie.price.max !== 'na'? cookie.price.max : ''%>">
+                </div>
+                <div class="col-3 col-md-1 pt-1 pb-1 pl-0 pr-0">
+                    <input class="form-control m-auto" type="text" placeholder="τ.μ. από" value="<%=typeof cookie.area.min !== 'undefined' && cookie.area.min !== 'na'? cookie.area.min : ''%>">
+                </div>
+                <div class="col-3 col-md-1 pt-1 pb-1 pl-0 pr-0">
+                    <input class="form-control m-auto" type="text" placeholder="τ.μ. έως" value="<%=typeof cookie.area.max !== 'undefined' && cookie.area.max !== 'na'? cookie.area.max : ''%>">
+                </div>
+                <div class="col-12 col-md-3 pt-1 pb-1 pl-0 pr-0">
+                    <button type="submit" class="btn btn-info m-auto btn-block">Βρες τώρα</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <div class="container" style="position: absolute;top: 92%;">
+
+    <div class="row">
+        <div class="col-12">
+            <h4>Αγγελίες που μόλις ανέβηκαν</h4>
+            <hr class="border-success">
+            <div class="glider-contain">
+                <div class="glider">
+                    <%if(typeof justUp !== 'undefined'){%>
+                        <%justUp.forEach((doc) =>{%>
+                            <%var img = doc.imgPaths%>
+                            <div class="m-1" style="background-image: url(<%=typeof img[0] !== 'undefined' ? img[0] : '/public/img/0.png'%>);background-size: cover;">
+                                <div style="height: 180px;">
+                                    <div style="background-color: rgba(0, 0, 0, 0.5);position: absolute;bottom: 3px;width: 269.5px;">
+                                        <div class="ml-2 mb-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><%=doc.price.now + '€, ' +(doc.type ? 'Αγορά' : 'Ενοικίαση')%></div>
+                                        <div class="ml-2 mb-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><%=doc.propType.sub + ', '+  +doc.area + ' τ.μ.' %></div>
+                                        <small class="ml-2 mb-0" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><%= doc.location.sub + ', ' + doc.location.street + ' ' + doc.location.address %></small>
+                                    </div>
+                                </div>
+                            </div> 
+                        <%})%>
+                    <%}%>
+                </div>
+                <button role="button" aria-label="Previous" class="glider-prev d-none d-md-block text-primary">«</button>
+                <button role="button" aria-label="Next" class="glider-next d-none d-md-block text-primary">»</button>
+            </div>
+        </div>
+    </div>
+
+
+    <pre class="mt-3"> </pre>
+    <pre class="mt-3"> </pre>
+
+    <div class="row">
+        <div class="col-6 bg-dark">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div class="col-6 bg-light">
+        </div>
+    </div>
+
+    <pre class="mt-3"> </pre>
+
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <h3>Υπηρεσίες για απλούς χρήστες</h3>
+            <hr class="border-success">
+
+            <div>
+                <h4 class="mt-5 text-info">mySpiti</h4>
+                <p class="lead mt-2 text-justify">
+                    Κάνε εγγραφή στο <a href="/" class="text-info font-weight-bold">spitiXorismesiti.gr</a> ώστε να μπορείς να αποθηκεύεις τις αναζητήσεις σου, να αποθηκεύεις αγγελίες ως αγαπημένες, να κρατάς σημειώσεις για αυτές, να τις μοιράζεσαι με τους φίλους σου αλλά και να αποκρύπτεις αγγελίες ότου δεν σε ενδιαφέρουν.
+                </p>
+            </div>
+                
+            <div>
+                <h4 class="mt-5 text-info">SpitiXorisMesiti Email Alerts</h4>
+                <p class="lead mt-2 text-justify">
+                    Με την υπηρεσία αυτή λαμβάνεις ενημερωτικά emails από το <a href="/" class="text-info">SpitiXorisMesiti.gr</a> και όχι από κάποιον μεσίτη, με όλα τα καινούρια ακίνητα που καταχωρούνται καθημερινά στο σάιτ μας και πληρούν τα κριτήρια αναζήτησης σου.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="mt-5 text-info">Xρήσιμα έγγραφα</h4>
+                <p class="lead mt-2 text-justify">
+                    Με την υπηρεσία αυτή μπορείς να ενημερωθείς για όλες τις απαραίτητες ενέργειες που χρειάζονται ώστε να αγοράσεις ή να ενοικιάσεις κάποιο ακίνητο βρες και κατέβασε τα απαραίτητα έγγραφα μόνο στο <a href="/" class="text-info">SpitiXorisMesiti.gr</a>.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="mt-5 text-info">Blog</h4>
+                <p class="lead mt-2 text-justify">
+                    Στο blog μας θα βρεις ενδιαφέροντα καθημερινά θέματα γύρω από την άγορα ή την ενοικίαση ακινήτων.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Υπηρεσίες για τους ιδιοκτήτες</h3>
+            <hr class="border-success">
+
+            <div>
+                <h4 class="mt-5 text-info">Καταχώρηση ακινήτου</h4>
+                <p class="lead mt-2 text-justify">
+                    Ανέβασε όλες σου τις αγγελίες στο <a href="/" class="text-info">spitiXorismesiti.gr</a> εντελώς Δωρεάν και για 6 ολόκληρους μήνες και βρες αγοραστή/ενοικιαστή για το ακίνητο σου χωρίς μεσιτικές αμοιβές. Και μην ξεχνάς: εδώ η αγγελία σου φαίνεται, δεν μετατοπίζεται από "επαγγελματικές" προς το τέλος...
+                </p>
+            </div>
+
+            <div>
+                <h4 class="mt-5 text-info">mySpiti</h4>
+                <p class="lead mt-2 text-justify">
+                    Με την υπηρεσία αυτή μπορείς ανά πάσα στιγμή να επεξεργαστείς την αγγελία σου και να την διαμορφώσεις  εκ νέου απ' την αρχή. Μπορείς επίσεις να δεις πόσες φορές προβλήθηκε η αγγελία σου αλλά και πόσες φορές έγινε η αγαπημένη για κάποιον χρήστη. Τέλος, μπορείς πολύ εύκολα να διαγράψεις οριστικά την αγγελία σου.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>SpitiXorisMesiti <a href="#" class="text-info">Blog</a></h3>
+            <hr class="border-success">
+            <div class="glider-contain">
+                <div class="glider2">
+                    <div class="bg-info m-1"><h1>1</h1></div>
+                    <div class="bg-info m-1"><h1>2</h1></div>
+                    <div class="bg-info m-1"><h1>3</h1></div>
+                    <div class="bg-info m-1"><h1>4</h1></div>
+                    <div class="bg-info m-1"><h1>5</h1></div>
+                    <div class="bg-info m-1"><h1>6</h1></div>
+                    <div class="bg-info m-1"><h1>7</h1></div>
+                    <div class="bg-info m-1"><h1>8</h1></div>
+                    <div class="bg-info m-1"><h1>9</h1></div>
+                </div>
+            
+                <button role="button" aria-label="Previous" class="glider-prev d-none d-md-block">«</button>
+                <button role="button" aria-label="Next" class="glider-next d-none d-md-block">»</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer font-small blue pt-4 mt-5">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+                <h5>spitiXorismesiti</h5>
+                <p>Επικοινωνία: info@spitixorismesiti.com</p>
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="col-lg-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Nav</h5>
+                <ul class="list-unstyled d-inline-flex d-lg-block">
+                    <li class="m-1">
+                        <a href="/">Αρχική</a>
+                    </li>
+                    <li class="m-1">
+                        <a href="#!">Αγορά</a>
+                    </li>
+                    <li class="m-1">
+                        <a href="#!">Ενοικίαση</a>
+                    </li>
+                    <li class="m-1">
+                        <a href="#!">Ποιοι είμαστε</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled d-inline-flex d-lg-block">
+                    <li class="m-1">
+                        <a href="#!">FAQ</a>
+                    </li>
+                    <li class="m-1">
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li class="m-1">
+                        <a href="#!">Όροι χρήσης</a>
+                    </li>
+                    <li class="m-1">
+                        <a href="#!">Χρήσιμα έγγραφα</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copyright text-center py-3">© 2020 Copyright: Spitixorismesiti</div>
+    </footer>
+    
+    
+</div>
+</div>
+
+<script src="/public/js/glider.min.js"></script>
+
+<script>
+    window.addEventListener('load', function(){
+    new Glider(document.querySelector('.glider'), {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        draggable: true,
+        arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'}
+    })
+    new Glider(document.querySelector('.glider2'), {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        draggable: true,
+        arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'}
+    })
+    })
+</script>

@@ -1,0 +1,21 @@
+<form autocomplete="off" id="form" action="/post/location?id=<%-ad._id%>" method="POST">
+    <div class="form-group">
+        <h5>Επίλεξε περιοχή:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="main" name="main" placeholder="Περιοχή" value="<%= ad.location.main != 'undefined' ? ad.location.main : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Επίλεξε υποπεριοχή:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="sub" name="sub" placeholder="Υποπεριοχή" value="<%= ad.location.sub != 'undefined' ? ad.location.sub : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Επίλεξε γειτονιά/χωριό:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control form-control-sm" id="location" name="location" placeholder="Γειτονιά/χωριό" value="<%= ad.location.area != 'undefined' ? ad.location.area : ''%>">
+    </div>
+    <div class="form-group">
+        <h5>Συμπλήρωσε την οδό και τον αριθμό στα Ελληνικά:<small class="text-muted"> (Υποχρεωτικό)</small></h5>
+        <input type="text" class="form-control-sm" id="address1" name="address1" placeholder="Οδό" value="<%= ad.location.street != 'undefined' ? ad.location.street : ''%>">
+        <input type="text" class="form-control-sm" id="address2" name="address2" placeholder="Αριθμό" value="<%= ad.location.address != 'undefined' ? ad.location.address : ''%>">
+    </div>
+    <hr class="border-success">
+    <button name="btn" type="submit" value="main-features" class="btn btn-primary btn-block">Επόμενο</button>
+</form>

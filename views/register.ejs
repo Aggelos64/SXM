@@ -1,0 +1,85 @@
+<div class="row mt-5">
+        <div class="col-md-6 m-auto">
+          <div class="card card-body">
+            <h1 class="text-center mb-3">Εγγραφή</h1>
+            <%- include('./partials/errmsg.ejs')%>
+            <form action="/users/register" method="POST">
+                <div class="form-group">
+                        <label for="fname">Όνομα</label>
+                        <input
+                            type="name"
+                            id="fname"
+                            name="fname"
+                            class="form-control"
+                            placeholder="Όνομα"
+                            value="<%= typeof fname != 'undefined' ? fname : '' %>"
+                        />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="lname">Επίθετο</label>
+                        <input
+                            type="name"
+                            id="lname"
+                            name="lname"
+                            class="form-control"
+                            placeholder="Επίθετο"
+                            value="<%= typeof lname != 'undefined' ? lname : '' %>"
+                        />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="Email">Email<small class="text-muted"> (Υποχρεωτικό)</small></label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Email"
+                            value="<%= typeof email != 'undefined' ? email : '' %>"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Τηλέφωνο</label>
+                        <input
+                            type="phone"
+                            id="phone"
+                            name="phone"
+                            class="form-control"
+                            placeholder="Τηλέφωνο"
+                            value="<%= typeof phone != 'undefined' ? phone : '' %>"
+                        />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password">Κωδικός<small class="text-muted"> (Υποχρεωτικό)</small></label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Κωδικός"
+                        />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password2">Επαλήθευση κωδικού<small class="text-muted"> (Υποχρεωτικό)</small></label>
+                        <input
+                            type="password"
+                            id="password2"
+                            name="password2"
+                            class="form-control"
+                            placeholder="Επαλήθευση κωδικού"
+                        />
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="tos">
+                            <label class="custom-control-label" for="customCheck1">Έχω διαβάσει και συμφωνώ με τους<a href="#"> όρους χρήσης.</a><small class="text-muted"> (Υποχρεωτικό)</small></label>
+                    </div>
+              <button type="submit" class="btn btn-primary btn-block">Εγγραφή</button>
+            </form>
+            <p class="lead mt-4">Έχεις λογαριασμό? <a href="/users/login">Σύνδεση.</a></p>
+          </div>
+        </div>
+      </div>

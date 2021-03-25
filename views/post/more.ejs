@@ -1,0 +1,174 @@
+<%var arr%>
+<%if(ad.propType.main == 'res'){%>
+    <%arr=[{name:"Ανελκυστήρας",value:"elevator"},{name:"Ανεμιστήρες οροφής",value:"ceilingFan"},{name:"Αποθήκη",value:"storage"},{name:"Βεράντα",value:"veranta"},{name:"Διπλά τζάμια",value:"doubleGlass"},{name:"Δορυφορική κεραία",value:"satelite"},{name:"Εωδοδαπέδια θέρμανση",value:"floorHeating"},{name:"Επιπλωμένο",value:"furnitures"},{name:"Εσωτερική σκάλα",value:"insideStairs"},{name:"Ηλιακός θερμοσίφωνας",value:"solarHeating"},{name:"Θέα",value:"view"},{name:"Θέσεις στάθμευσης",value:"parking"},{name:"Θυροτηλεόραση",value:"buzzCamera"},{name:"Κατοικίδια ευπρόσδεκτα",value:"pets"},{name:"Κήπος",value:"garden"},{name:"Κλιματισμός",value:"ac"},{name:"Μπαλκόνι",value:"balcony"},{name:"Μπόιλερ",value:"boiler"},{name:"Νυχτερινό ρεύμα",value:"nightPower"},{name:"Πισίνα",value:"pool"},{name:"Πόρτα ασφαλείας",value:"securityDoor"},{name:"Ράμπα για ΑΜΕΑ",value:"ramp"},{name:"Σίτες",value:"sita"},{name:"Σοφίτα",value:"attic"},{name:"Συναγερμός",value:"alarm"},{name:"Τέντες",value:"tent"},{name:"Τζάκι",value:"firePlace"},{name:"Χωρίς κοινόχρηστα",value:"withoutUtilities"},{name:"Jacuzzi",value:"jacuzzi"},{name:"Playroom",value:"playroom"}]%>
+<%} else if(ad.propType.main == 'pro'){%>
+    <%arr=[{name:"Ανελκυστήρας",value:"elevator"},{name:"Αποθήκη",value:"storage"},{name:"Γωνιακό",value:"corner"},{name:"Θέα",value:"view"},{name:"Θέσεις στάθμευσης",value:"parking"},{name:"Κλιματισμός",value:"ac"},{name:"Μπαλκόνι",value:"balcony"},{name:"Πόρτα ασφαλείας",value:"securityDoor"},{name:"Ράμπα φορτοελφόρτωσης",value:"loadingDock"},{name:"Ρετιρέ",value:"penthouse"},{name:"Συναγερμός",value:"alarm"},{name:"Χωρίς κοινόχρηστα",value:"withoutUtilities"}]%>
+<%} else if(ad.propType.main == 'land'){%>
+    <%arr=[{name:"Γωνιακό",value:"corner"},{name:"Εντός σχεδίου πόλης",value:"inCityPlanning"},{name:"Θέα",value:"view"},{name:"Κατάλληλο για αγροτική χρηση",value:"forFarming"}]%>
+<%} else {%>
+    <%arr=[{name:"Ανελκυστήρας",value:"elevator"},{name:"Αποθήκη",value:"storage"},{name:"Γωνιακό",value:"corner"},{name:"Εξοπλισμένο",value:"equiped"},{name:"Θέα",value:"view"},{name:"Θέσεις στάθμευσης",value:"parking"},{name:"Κλιματισμός",value:"ac"},{name:"Ράμπα φορτοελφόρτωσης",value:"loadingDock"},{name:"Συναγερμός",value:"alarm"},{name:"Χωρίς αέρα",value:"air"},{name:"Χωρίς κοινόχρηστα",value:"withoutUtilities"}]%>
+<%}%>
+
+
+<form id="form" action="/post/more?id=<%-ad._id%>" method="POST">
+    <div>
+        <h5>Περρισότερα στοιχεία του ακινήτου</h5>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ΝΑΙ</th>
+                    <th scope="col">ΟΧΙ</th>
+                    <th scope="col">ΔΕΝ ΓΝΩΡΙΖΩ</th>
+                </tr>
+                <tbody>
+                    <%arr.forEach(function(item){%>
+                    <tr>
+                        <th scope="row"><%-item.name%></th>
+                        <td><input type="radio" name="<%-item.value%>" value="true" <%=typeof ad.atrr.extra[item.value] != 'undefined' && ad.atrr.extra[item.value] ? 'checked' : ''%> ></td>
+                        <td><input type="radio" name="<%-item.value%>" value="false" <%=typeof ad.atrr.extra[item.value] != 'undefined' && ad.atrr.extra[item.value] == false ? 'checked' : ''%>></td>
+                        <td><input type="radio" name="<%-item.value%>" value="" <%=typeof ad.atrr.extra[item.value] == 'undefined' || ad.atrr.extra[item.value] == null ? 'checked' : ''%>></td>
+                    </tr>
+                    <%})%>
+                </tbody>
+            </thead>
+        </table>
+    </div>
+    <hr class="border-success">
+    <%if(ad.propType.main != 'land'){%>
+    <div class="form-group">
+        <h5>Κοινόχρηστα:<small class="text-muted"> (μέσος όρος)</small></h5>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="utilities" name="utilities" placeholder="Πληκτρολόγησε μόνο αριθμούς" value="<%= ad.price.utilities != 'undefined' ? ad.price.utilities : ''%>">
+            <div class="input-group-append">
+                <span class="input-group-text">€/μήνα</span>
+            </div>
+        </div>
+    </div>
+    <%if(ad.propType.main != 'other'){%>
+    <div class="form-group">
+        <h5>Ενεργειακή κλάση:</h5>
+        <select class="form-control btn-sm" name="energyclass" id="energyclass">
+            <option value="<%= ad.atrr.energyClass != 'undefined' ? ad.atrr.energyClass : ''%>">Επίλεξε</option>
+            <option>Α+</option>
+            <option>Α</option>
+            <option>Β+</option>
+            <option>Β</option>
+            <option>Γ</option>
+            <option>Δ</option>
+            <option>Ε</option>
+            <option>Ζ</option>
+            <option>Η</option>
+        </select>
+    </div>
+    <%}%>
+    <%if(ad.propType.main == 'pro'){%>
+        <div class="form-group">
+            <h5>Ρεύμα:</h5>
+            <select class="form-control btn-sm" name="phases" id="phases">
+                <option value="<%= ad.atrr.powerPhases != 'undefined' ? ad.atrr.powerPhases : ''%>">Επίλεξε</option>
+                <option>Μονοφασικό</option>
+                <option>Τριφασικό</option>
+                <option>Βιομηχανικό</option>
+            </select>
+        </div>
+    <%}%>
+    <%}%>
+    <%if(ad.propType.main == 'res' || ad.propType.main == 'land'){%>
+    <div class="form-group">
+        <h5>Προσανατολισμός:</h5>
+        <select class="form-control btn-sm" name="direction" id="direction">
+            <option value="<%= ad.atrr.direction != 'undefined' ? ad.atrr.direction : ''%>">Επίλεξε</option>
+            <option>Ανατολικός</option>
+            <option>Ανατολικοδυτικός</option>
+            <option>Βόρειος</option>
+            <option>Βορειοανατολικός</option>
+            <option>Βόρειοδυτικός</option>
+            <option>Δυτικός</option>
+            <option>Νότιος</option>
+            <option>Νότιοανατολικός</option>
+            <option>Νότιοδυτικός</option>
+        </select>
+    </div>
+    <%}%>
+    <%if(ad.propType.main != 'other'){%>
+    <div class="form-group">
+        <h5>Κοντά σε:</h5>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Αεροδρόμιο" <%= ad.atrr.near.includes('Αεροδρόμιο') ? 'checked' : '' %>>Αεροδρόμιο</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Ηλεκτρικός" <%= ad.atrr.near.includes('Ηλεκτρικός') ? 'checked' : '' %>>Ηλεκτρικός</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Λεωφορείο" <%= ad.atrr.near.includes('Λεωφορείο') ? 'checked' : '' %>>Λεωφορείο</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Λιμάνι" <%= ad.atrr.near.includes('Λιμάνι') ? 'checked' : '' %>>Λιμάνι</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Μετρό" <%= ad.atrr.near.includes('Μετρό') ? 'checked' : '' %>>Μετρό</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Τραμ" <%= ad.atrr.near.includes('Τραμ') ? 'checked' : '' %>>Τραμ</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Τρένο" <%= ad.atrr.near.includes('Τρένο') ? 'checked' : '' %>>Τρένο</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Τρολεί" <%= ad.atrr.near.includes('Τρολεί') ? 'checked' : '' %>>Τρολεί</label>
+        <label class="form-check-label d-block"><input name="near" class="form-check-input" type="checkbox" value="Μεσα μαζικής μεταφοράς" <%= ad.atrr.near.includes('Μεσα μαζικής μεταφοράς') ? 'checked' : '' %>>Μεσα μαζικής μεταφοράς</label>
+    </div>
+    <%}%>
+    <%if(ad.propType.main == 'other'){%>
+        <div class="form-group">
+            <h5>Έτη που λειτουργεί η επιχείρηση:</h5>
+            <select class="form-control btn-sm" name="bage" id="bage">
+                <option value="<%= ad.atrr.bussnessAge != 'undefined' ? ad.atrr.bussnessAge : ''%>">Επίλεξε</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10+</option>
+            </select>
+        </div>
+    <%}%>
+    <%if(ad.propType.main == 'res'){%>
+    <div class="form-group">
+        <h5>Είδος ακινήτου:</h5>
+        <select class="form-control btn-sm" name="kind" id="kind">
+            <option value="<%= ad.atrr.kind != 'undefined' ? ad.atrr.kind : ''%>">Επίλεξε</option>
+            <option>Διατηρητέο</option>
+            <option>Λυόμενο</option>
+            <option>Νεοκλασικό</option>
+            <option>Παραδοσιακό</option>
+            <option>Πέτρινο</option>
+            <option>Προκατασκευή</option>
+        </select>
+    </div>
+    <%}%>
+    <div class="form-group">
+        <h5>Ζώνη:</h5>
+        <select class="form-control btn-sm" name="zone" id="zone">
+            <option value="<%= ad.atrr.zone != 'undefined' ? ad.atrr.zone : ''%>">Επίλεξε</option>
+            <option>Οικιστική</option>
+            <option>Αγροτική</option>
+            <option>Εμπορική</option>
+            <option>Βιομηχανική</option>
+            <option>Ανάπλασης</option>
+            <option>Εκτός σχεδίου</option>
+        </select>
+    </div>
+    <%if(ad.propType.main == 'land'){%>
+        <div class="form-group">
+            <h5>Συντελεστής δόμησης:</h5>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="buildFactor" name="buildFactor" placeholder="Πληκτρολόγησε μόνο αριθμούς" value="<%= ad.atrr.buildFactor != 'undefined' ? ad.atrr.buildFactor : ''%>">
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>Συντελεστής κάλυψης:</h5>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="coverFactor" name="coverFactor" placeholder="Πληκτρολόγησε μόνο αριθμούς %" value="<%= ad.atrr.coverFactor != 'undefined' ? ad.atrr.coverFactor : ''%>">
+            </div>
+        </div>
+    <%}%>
+    <div class="form-group">
+        <h5>Διαθέσιμο απο:</h5>
+        <input autocomplete="off" id="datepicker" type="text" name="available" value="<%=typeof ad.atrr.availableFrom != 'undefined' ? (new Date(ad.atrr.availableFrom)).toLocaleDateString('en-US', {day: '2-digit',month: '2-digit',year: 'numeric'}) : ''%>">
+    </div>
+    <hr class="border-success">
+    <button name="btn" type="submit" value="discription" class="btn btn-primary btn-block mb-5">Επόμενο</button>
+</form>
+
+<script src="/public/js/post/more.js"></script>

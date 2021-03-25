@@ -1,0 +1,36 @@
+QUERRY:
+pr = Price Range ("na-na") 0 for none
+ar = Area Range ("na-na") 0 for none
+st = propTypeSub
+fr = Floor Range ("na-na") 0 for none
+rr = Room Range ("na-na") 0 for none
+Br = Bath Range ("na-na") 0 for none
+h = Heat
+ht = Heat Type
+yr = Year Range ("na-na") 0 for none
+status
+ada = ad age
+adaup = ad updated age
+id
+ppr = Price Per sm Range ("na-na") 0 for none
+ec = Energy Class
+pe = Pro Energy
+d = direction
+n = near
+k = kind
+z = zone
+hp = Has Photos ? boolean
+isd = Is Discounted ? boolean
+ba = Ageo of Bussness
+extra ? number turn to binary for extra object
+sort
+qnt
+
+PARAMS:
+location : "ln-n-nln-nln" l devides each value and "-" devides the path to that location
+type : buy(true) or rent(false)
+propTypeMain : (res,pro,land,other)
+
+url:
+domain/ln-n-nln-nln/buy/res?
+pr=@&ar=@&sort=@&qnt=@&st=@&fr=@&rr=@&br=@&h=@&ht=@&yt=@&status=@&ada=@&adaup=@&id=@&ppr=@&ec=@&pe=@&d=@&n=@&k=@&z=@&hp=@&isd=@&ba=@&extra=@

@@ -1,0 +1,384 @@
+<pre class="mt-2"></pre>
+
+<div id="windows" class="d-none">
+    <div id="socialWindow" class="window d-none">
+        <div id="socialContainer">
+            <span class="closebtn"><img src="/public/img/close.png" alt="close" /></span>
+            <span class="social" id="fb"><img src="/public/img/fb.png" alt="Facebook" /></span>
+            <span class="social" id="tw"><img src="/public/img/tw.png" alt="Twitter" /></span>
+        </div>
+    </div>
+    <div id="reportWindow" class="window d-none">
+        <span class="closebtn"><img src="/public/img/close.png" alt="close" /></span>
+    </div>
+    <div id="successWindow" class="window d-none">
+        <span class="closebtn"><img src="/public/img/close.png" alt="close" /></span>
+    </div>
+    <div id="failWindow" class="window d-none">
+        <span class="closebtn"><img src="/public/img/close.png" alt="close" /></span>
+    </div>
+</div>
+
+<div class="mt-5">
+    <div class="container" style="overflow: hidden;">
+        <h4><%= (ad.type ? 'Αγορά' : 'Ενοικίαση') + ' , ' + ad.propType.sub + ' ' + ad.area + ' τ.μ. , ' + ad.price.now + '€ , Κωδικός:' /*+ ad._id*/%></h4>
+        <h5><%= ad.location.main + '/' + ad.location.sub + '/' + ad.location.area + '/' + ad.location.street + ' ' + ad.location.address %></h5>
+        <div>
+            <a href="#gt1" class="mt-2 btn btn-primary">Γενικά</a>
+            <a href="#gt2" class="mt-2 btn btn-primary">Χαρακτηριστικά</a>
+            <a href="#gt3" class="mt-2 btn btn-primary">Τοποθεσία</a>
+            <a href="#gt4" class="mt-2 btn btn-primary">Επικοινωνία</a>
+        </div>
+        <div style="display: block;position: relative;top: -70px;visibility: hidden;" id="gt1"></div>
+        <div class="row mt-4">
+
+            <div class="col-12 col-md-5">
+                <div class="mt-3 bg-dark h-100" style="width: 408px;height: 408px;">
+                    <%if(ad.pics.length > 0){%>
+                        <%const pics = ad.imgPaths%>
+                        <div class="text-center overflow-hidden" style="width: 408px;height: 306px;">
+                            <img id="mainImg" src="<%= pics[0]%>" height="300px">
+                            <img id="expand" src="/public/img/expandx64.png">
+                        </div>
+                        <div class="glider-contain overflow-hidden rm" style="max-width: 408px;height: 118px;">
+                            <div class="glider">
+                                <%pics.forEach(function(pic) {%>
+                                    <div class="m-2 p-0 border border-light overflow-hidden" style="height: 118px;">
+                                        <img class="align-middle" src="<%= pic%>" height="118px" width="100%">
+                                    </div>
+                                <%})%>
+                            </div>
+
+                            <button role="button" aria-label="Previous" class="glider-prev d-none d-md-block">«</button>
+                            <button role="button" aria-label="Next" class="glider-next d-none d-md-block">»</button>
+                        </div>
+                    <%} else {%>
+                        <p>Αγγελία χωρίς φωτογραφίες.<br>Ζήτα φωτογραφίες από τον ιδιοκτήτη</p>
+                    <%}%>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-5">
+                <div class="mt-3">
+                    <table class="table table-hover">
+                        <tr>
+                            <th scope="row">Κατηγορία:</th>
+                            <td><%=ad.propType.main == 'res' ? 'Κατοικία' : ad.propType.main == 'pro' ? 'Επαγγελματικός Χωρος' : ad.propType.main == 'land' ? 'Γη' : 'Λοιπά Ακίνητα'%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Τύπος:</th>
+                            <td><%=ad.propType.sub%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Σκοπός:</th>
+                            <td><%=ad.type ? 'Αγορά' : 'Ενοικίαση'%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Περιοχή:</th>
+                            <td><%=ad.location.main + ' , ' + ad.location.sub%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Διεύθυνση:</th>
+                            <td><%=ad.location.street + ' ' + ad.location.address + ' , ' + ad.location.area%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Τιμή:</th>
+                            <td><%=ad.price.now + (ad.type ? ' €' : ' €/μήνα')%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Εμβαδόν:</th>
+                            <td><%=ad.area + ' τ.μ.'%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Τηλ. ιδιοκτήτη:</th>
+                            <td><%=ad.contactInfo.tel%></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-md-2 border border-dark">
+                <div class="m-2">
+                    <p class="font-weight-bold">Στοιχεία επικοινωνίας</p>
+                    <p><strong>Ον/μο:</strong> <%= ad.contactInfo.fname + ' ' + ad.contactInfo.lname%> </p>
+                    <p><strong>Τηλ:</strong> <%=ad.contactInfo.tel%> </p>
+                    <p><strong>Ωρες:</strong> <%= ad.contactInfo.contactTime == null ? 'Όλες τις ώρες' : ad.contactInfo.contactTime ? 'Πρωίνες ώρες' : 'Απογευματινές ώρες'%> </p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="row">
+                <div class="col-auto text-info" id="addFav"><img class="mr-2" src="/public/img/like.png"><small class="text-info">Προσθήκη στις αγαπημένες</small></div>
+                <div class="col-auto text-info" id="report"><img class="mr-2" src="/public/img/report.png"><small class="text-info">Αναφορά αγγελίας</small></div>
+                <div class="col-auto text-info" id="hide"><img class="mr-2" src="/public/img/hide.png"><small class="text-info">Απόκρυψη αγγελίας</small></div>
+                <div class="col-auto text-info" id="print"><img class="mr-2" src="/public/img/print.png"><small class="text-info">Εκτύποση</small></div>
+                <div class="col-auto text-info" id="share"><img class="mr-2" src="/public/img/share.png"><small class="text-info">Μοιράσου</small></div>
+            </div>
+        </div>
+    <hr class="border-success">
+    <div style="display: block;position: relative;top: -70px;visibility: hidden;" id="gt2"></div>
+    <h4 class="mt-5">Χαρακτηριστικά ακίνητου</h4>
+        <div class="row">
+            <br>
+            <div class="col-12 col-md-9">
+                <table class="table table-hover">
+                    <tr>
+                        <th scope="row">Τύπος:</th>
+                        <td><%=ad.propType.sub%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Διεύθυνση:</th>
+                        <td><%=ad.location.street + ' ' + ad.location.address + ' , ' + ad.location.area%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Τιμή:</th>
+                        <td><%=ad.price.now + (ad.type ? ' €' : ' €/μήνα')%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Εμβαδόν:</th>
+                        <td><%=ad.area + ' τ.μ.'%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Τιμή ανα τ.μ.:</th>
+                        <td><%=Math.round(ad.price.now/ad.area)%></td>
+                    </tr>
+                    <%if(ad.atrr.propArea != null){%>
+                    <tr>
+                        <th scope="row">Εμβαδόν οικοπέδου:</th>
+                        <td><%=ad.atrr.propArea%></td>
+                    </tr>
+                    <%}%>
+                    <%if(ad.atrr.floor != null){%>
+                    <tr>
+                        <th scope="row">Όροφος:</th>
+                        <td><%=ad.atrr.floor%></td>
+                    </tr>
+                    <%}%>
+                    <%if(ad.atrr.floors != null){%>
+                    <tr>
+                        <th scope="row">Επίπεδα:</th>
+                        <td><%=ad.atrr.floors%></td>
+                    </tr>
+                    <%}%>
+                </table>
+                <%if(ad.atrr.bedrooms != null || ad.atrr.kitchens != null || ad.atrr.bathrooms != null || ad.atrr.livingrooms != null){%>
+                <table class="table table-hover border border-dark">
+                    <tr>
+                        <th scope="row">Δωμάτια:</th>
+                        <td><%=ad.atrr.bedrooms != null ? ad.atrr.bedrooms : '-' %></td>
+                        <th scope="row">Κουζίνες:</th>
+                        <td><%=ad.atrr.kitchens != null ? ad.atrr.kitchens : '-' %></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Μπάνια:</th>
+                        <td><%=ad.atrr.bathrooms != null ? ad.atrr.bathrooms : '-' %></td>
+                        <th scope="row">Σαλόνια:</th>
+                        <td><%=ad.atrr.livingrooms != null ? ad.atrr.livingrooms : '-' %></td>
+                    </tr>
+                </table>
+                <%}%>
+            </div>
+            <div class="col-12 col-md-3 bg-light">
+                hery
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <%if(!((typeof ad.atrr.heat == 'undefined' || ad.atrr.heat == '') && (typeof ad.atrr.heatType == 'undefined' || ad.atrr.heatType == ''))){%>
+                <table class="table table-hover border border-dark">
+                    <tr>
+                        <%if(typeof ad.atrr.heat != 'undefined' && ad.atrr.heat != ''){%>
+                        <th scope="row">Θέρμανση:</th>
+                        <td><%=ad.atrr.heat%></td>
+                        <%}%>
+                        <%if(typeof ad.atrr.heatType != 'undefined' && ad.atrr.heatType != ''){%>
+                        <th scope="row">Μέσο θέρμανσης:</th>
+                        <td><%=ad.atrr.heatType%></td>
+                        <%}%>
+                        <%if((typeof ad.atrr.heat != 'undefined' && ad.atrr.heat != '') || (typeof ad.atrr.heatType != 'undefined' && ad.atrr.heatType != '')){%>
+                        <th scope="row"></th>
+                        <td></td>
+                        <%}%>
+                    </tr>
+                </table>
+                <%}%>
+            </div>
+            <div class="col-12 mt-3">
+                <%if(!(ad.atrr.constAge == null && typeof ad.atrr.status == 'undefined')){%>
+                <table class="table table-hover border border-dark">
+                    <%if(ad.atrr.constAge != null){%>
+                    <tr>
+                        <th scope="row">Έτος κατασκευής:</th>
+                        <td><%=ad.atrr.constAge%></td>
+                    </tr>
+                    <%}%>
+                    <%if(Array.isArray(ad.atrr.status) && ad.atrr.status.length){%>
+                    <tr>
+                        <th scope="row">Κατάσταση ακίνητου:</th>
+                        <td><%=ad.statusString%></td>
+                    </tr>
+                    <%}%>
+                </table>
+                <%}%>
+            </div>
+            <div class="col-12 mt-3">
+                <table class="table table-hover border border-dark table-sm table-borderless">
+                    <%var extra = ad.sss%>
+                    <%for(var i = 0;i<extra.length;i+=3){%>
+                        <tr>
+                            <td><%=extra[i]%></td>
+                            <td><%=typeof extra[i+1] == 'undefined' ? '' : extra[i+1]%></td>
+                            <td><%=typeof extra[i+2] == 'undefined' ? '' : extra[i+2]%></td>
+                        </tr>
+                    <%}%>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <table class="table table-hover border border-dark">
+                    <%if(ad.price.utilities != null && (typeof ad.atrr.extra.withoutUtilities == 'undefined' || !ad.atrr.extra.withoutUtilities)){%>
+                        <tr>
+                            <th scope="row">Κοινόχρηστα:<small>(μέσος όρος)</small></th>
+                            <td><%=ad.price.utilities + (ad.type ? ' €' : ' €/μήνα')%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.energyClass != 'undefined' && ad.atrr.energyClass != ''){%>
+                        <tr>
+                            <th scope="row">Ενεργειακή κλάση:</th>
+                            <td><%=ad.atrr.energyClass%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.powerPhases != 'undefined' && ad.atrr.powerPhases != ''){%>
+                        <tr>
+                            <th scope="row">Ρεύμα:</th>
+                            <td><%=ad.atrr.powerPhases%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.direction != 'undefined' && ad.atrr.direction != ''){%>
+                        <tr>
+                            <th scope="row">Προσανατολισμός:</th>
+                            <td><%=ad.atrr.direction%></td>
+                        </tr>
+                    <%}%>
+                    <%if(Array.isArray(ad.atrr.near) && ad.atrr.near.length){%>
+                        <tr>
+                            <th scope="row">Το ακίνητο βρίσκεται κοντά σε:</th>
+                            <td><%=ad.atrr.near%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.kind != 'undefined' && ad.atrr.kind != ''){%>
+                        <tr>
+                            <th scope="row">Είδος ακινήτου:</th>
+                            <td><%=ad.atrr.kind%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.bussnessAge != 'undefined' && ad.atrr.bussnessAge != ''){%>
+                        <tr>
+                            <th scope="row">Έτη που λειτουργή η επιχείρηση:</th>
+                            <td><%=ad.atrr.bussnessAge%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.zone != 'undefined' && ad.atrr.zone != ''){%>
+                        <tr>
+                            <th scope="row">Ζώνη:</th>
+                            <td><%=ad.atrr.zone%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.buildFactor != 'undefined' && ad.atrr.buildFactor != ''){%>
+                        <tr>
+                            <th scope="row">Συντελεστής δόμησης:</th>
+                            <td><%=ad.atrr.buildFactor%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.coverFactor != 'undefined' && ad.atrr.coverFactor != ''){%>
+                        <tr>
+                            <th scope="row">Συντελεστής κάλυψης:</th>
+                            <td><%=ad.atrr.coverFactor%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad._id != 'undefined' && ad._id != ''){%>
+                        <tr>
+                            <th scope="row">Κωδικός ακίνητου:</th>
+                            <td><%=ad._id%></td>
+                        </tr>
+                    <%}%>
+                    <%if(typeof ad.atrr.availableFrom != 'undefined' && ad.atrr.availableFrom != ''){%>
+                        <tr>
+                            <th scope="row">Διαθέσημο από:</th>
+                            <td><%=ad.atrr.availableFrom.toLocaleDateString()%></td>
+                        </tr>
+                    <%}%>
+                </table>
+            </div>
+            <div class="col-12 col-md-3 bg-light">
+                hery
+            </div>
+        </div>
+        <div class="row">
+            <h4>Περιγραφή ακινήτου:</h4>
+            <div class="col-12">
+                <p><%=ad.discription%></p>
+            </div>
+        </div>
+        <div style="display: block;position: relative;top: -70px;visibility: hidden;" id="gt3"></div>
+        <div class="row">
+            <h4>Τοποθεσία:</h4>
+            <div class="col-12 jumbotron">
+                <h5><%= ad.location.main + ' , ' + ad.location.sub + ' , ' + ad.location.area + ' , ' + ad.location.street + ' ' + ad.location.address %></h5>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12114.475770080497!2d22.98214910285646!3d40.616230302403395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a838e9616896bd%3A0x2bba6bdf460e7791!2zzqPPhM6szrTOuc6_IM6gzpHOn86a!5e0!3m2!1sel!2sgr!4v1583029958760!5m2!1sel!2sgr" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <div style="display: block;position: relative;top: -70px;visibility: hidden;" id="gt4"></div>
+        <div class="row">
+            <h4>Επικοινωνία:</h4>
+            <div class="col-12">
+                <table class="table table-borderless table-sm">
+                    <tr>
+                        <td>Ον/μο: <%= ad.contactInfo.fname + ' ' + ad.contactInfo.lname%></td>
+                    </tr>
+                    <tr>
+                        <td>Τηλ: <%=ad.contactInfo.tel%></td>
+                    </tr>
+                    <tr>
+                        <td>Ωρες: <%= ad.contactInfo.contactTime == null ? 'Όλες τις ώρες' : ad.contactInfo.contactTime ? 'Πρωίνες ώρες' : 'Απογευματινές ώρες'%></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+    <tr><td></td></tr>
+<div class="m-2">
+    <%//if(typeof ad.video != 'undefined' && ad.video != ''){%>
+        <iframe width="" src="<%=//ad.video%>"></iframe>
+    <%//}%>
+</div>
+-->
+
+<script src="./public/js/glider.min.js"></script>
+
+<script>
+window.addEventListener('load', function(){
+    new Glider(document.querySelector('.glider'), {
+        slidesToShow: 4,
+        draggable: true,
+        arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+        }
+    });
+
+    $('.rm').removeClass('overflow-hidden');
+
+    var mainImg = $('#mainImg');
+
+    $('.glider').children().children().on('click', function(){
+        $(mainImg).attr('src', $(this).children().attr('src'))
+    })
+})
+</script>
+
+<script src="/public/js/show.js"></script>
